@@ -150,7 +150,8 @@ train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
 print('{:>5,} training samples'.format(train_size))
 print('{:>5,} validation samples'.format(val_size))
 
-
+# TODO Training and validation
+separate("TRAINING DAN VALIDASI")
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 
 # The DataLoader needs to know our batch size for training, so we specify it
@@ -173,7 +174,7 @@ validation_dataloader = DataLoader(
             batch_size = batch_size # Evaluate with this batch size.
         )
 
-
+# TODO load BertForSequenceClassification
 separate("LOAD BertForSequenceClassification")
 from transformers import BertForSequenceClassification, AdamW, BertConfig
 
@@ -187,6 +188,7 @@ model = BertForSequenceClassification.from_pretrained(
     output_hidden_states = False, # Whether the model returns all hidden-states.
 )
 
+# TODO Run with cpu/gpu
 separate("RUN WITH CPU/GPU")
 import logging
 # If there's a GPU available...
@@ -199,6 +201,8 @@ else:
 
 # Tell pytorch to run this model on the GPU.
 
+
+# TODO Check embedding layers, first layer transformer and output layer
 separate("PRINT SEMUA PARAMETER MODEL")
 # Get all of the model's parameters as a list of tuples.
 params = list(model.named_parameters())
@@ -219,3 +223,5 @@ print('\n==== Output Layer ====\n')
 
 for p in params[-4:]:
     print("{:<55} {:>12}".format(p[0], str(tuple(p[1].size()))))
+
+
