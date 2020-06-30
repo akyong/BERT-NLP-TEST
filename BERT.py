@@ -225,3 +225,29 @@ for p in params[-4:]:
     print("{:<55} {:>12}".format(p[0], str(tuple(p[1].size()))))
 
 
+separate("Optimasi ketika menjalankan kode")
+# Note: AdamW is a class from the huggingface library (as opposed to pytorch)
+# I believe the 'W' stands for 'Weight Decay fix"
+optimizer = AdamW(model.parameters(),
+                  lr = 2e-5, # args.learning_rate - default is 5e-5, our notebook had 2e-5
+                  eps = 1e-8 # args.adam_epsilon  - default is 1e-8.
+                )
+# Karena ingin menjalankan 4 epoch
+# Batch size: 32 (set when creating our DataLoaders)
+# Learning rate: 2e-5
+# Epochs: 4 (we'll see that this is probably too many...)
+# Jadi kodenya adalah sebagai berikut.
+
+from transformers import get_linear_schedule_with_warmup
+
+epochs = 4
+
+# Total number of training steps is [number of batches] x [number of epochs].
+# (Note that this is not the same as the number of training samples).
+# TOTAL DARI 4 EPOCH ada BERAPA BATCH
+total_steps = len(train_dataloader) * epochs
+
+# Create the learning rate scheduler.
+scheduler = get_linear_schedule_with_warmup(optimizer,
+                                            num_warmup_steps = 0, # Default value in run_glue.py
+                                            num_training_steps = total_steps)
