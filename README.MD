@@ -27,6 +27,7 @@ Step:
 
 Question: 
 1. Kenapa dataset harus 90% digunakan untuk training dan 10% digunakan sebagai validasi?
+    - bebas 
 2. pada poin 6 terdapat `batch_size`, bagaimana menentukan batch_size? sedangkan dari authorsnya merekomendasikan 32.
 3. Kenapa model `BertForSequenceClassification` output-nya harus 2? [lihat code](https://github.com/akyong/BERT-NLP-TEST/blob/master/BERT.py#L185)
 4. 
@@ -34,3 +35,8 @@ Question:
 
 note:
 `Epoch` adalah satu putaran training, sedangkan batch adalah pembagian dari epoch, karena epoch yang terlalu besar harus dibagi menjadi beberapa bagian kecil yang disebut `batches.` Sedangkan `Iterations` adalah jumlah batch yang harus dijalankan untuk menyelesaikan suatu `epoch`.
+
+`Pre-trained`: menggunakan weight dari model yangg telah di trained instead of random weight.
+`Fine tuning`: Modifikasi layer klasifikasi sesuai kebutuhan, layer lain pakai weight dari pretrained
+
+pytorch vs keras
